@@ -19,11 +19,11 @@ void setup() {
   pinMode(PINangle, OUTPUT);
   pinMode(PINspeed, OUTPUT);
   
-  angle.attach(PINangle, 1000, 2000);         //largeur impulsion positive 5V
-  esc.attach(PINspeed, 1000, 2000);
+  angle.attach(PINangle, 1180, 1550);         //largeur impulsion positive 5V
+  esc.attach(PINspeed, 0, 2000);
 
   esc.writeMicroseconds(1500);
-  angle.writeMicroseconds(1300);
+  angle.writeMicroseconds(1370);
  
 }
 
@@ -31,19 +31,18 @@ void loop() {
   if (Serial.available() >= 2) {
     // On lit la commande et l'argument sur le port série
     uint8_t ordre = Serial.read();
-    uint8_t val = Serial.read();
-
+    uint8_t val = Serial.read(); //ici j'ai changé j'ai plus un octet mais un double
+    //je dois modifier la ligne au-dessus pour la concordance des types
     // On effectue la commande associé
     if (ordre == AngleOrder) {
-      int pwm_angle = (int)val*10;
-      
+      double pwm_angle = (double)val*185+1365; //on donne entre -1 et 1 sur python: -1 tourne au max à gauche et 1 à droite
+      //vérifier si les concordances des types est correcte
       Serial.print("angle: ");
       Serial.println(pwm_angle);
       // On écrit la valeur sur le servo
       angle.writeMicroseconds(pwm_angle);
     } else if (ordre == SpeedOrder) {
-      
-      int pwm_vitesse = (int)val*10;
+      double pwm_vitesse = (double)val*200+1500;  //on donne entre -1 et 1, à partir de 0 çca avance, pas de marche arrière pour l'instant
       Serial.print("speed: ");
       Serial.println(pwm_vitesse);
       // On écrit sur l'ESC
