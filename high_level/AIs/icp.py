@@ -19,4 +19,3 @@ def movement(prev_data, new_data):
     theta = -1*(min_delta[0]-90)*pi/180
     r = min_delta[1]
     return (-r*cos(theta), -r*sin(theta))
-        
