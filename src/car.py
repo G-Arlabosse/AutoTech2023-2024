@@ -1,14 +1,13 @@
 import struct 
 import time
 
+ANGLE_DIFFERENTIAL = 0.1
+SPEED_ARGUMENT_MAX = 1
+SPEED_ARGUMENT_MIN = 0
+ANGLE_ARGUMENT_MAX = 1
+ANGLE_ARGUMENT_MIN = -1
 
 class Car:
-
-    self.ANGLE_DIFFERENTIAL = 0.1
-    self.SPEED_ARGUMENT_MAX = 1
-    self.SPEED_ARGUMENT_MIN = 0
-    self.ANGLE_ARGUMENT_MAX = 1
-    self.ANGLE_ARGUMENT_MIN = -1
 
     
     def __init__(self, serial):
