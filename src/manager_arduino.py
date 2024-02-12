@@ -2,8 +2,12 @@ import serial
 import time 
 from car import Car
 import pygame
+import os
 
 if __name__ == '__main__':
+
+    os.environ["SDL_VIDEODRIVER"] = "dummy" #Fix pour avoir un faux driver vidéo pour que Pygame fonctionne
+
     ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)   #à changer avec le bon port arduino
     ser.reset_input_buffer()
 
