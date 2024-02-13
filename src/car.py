@@ -50,7 +50,7 @@ class Car:
         self.speed_argument = 0
         self.angle_argument = 0
         self.sendOrder(97, self.angle_argument)
-        self.sendOrder(98, self.angle_argument)
+        self.sendOrder(98, self.speed_argument)
 
     def stop(self):
         self.sendOrder(98, SPEED_ARGUMENT_MIN)
@@ -71,6 +71,6 @@ if __name__ == "__main__":
             car.speed_up()
         if com == "s":
             car.speed_down()
-        if com == "quit":
-            done = True
+        if com == "x":
             car.stop()
+            break
