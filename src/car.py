@@ -1,5 +1,6 @@
 import struct 
 import time
+import serial
 
 ANGLE_DIFFERENTIAL = 0.1
 SPEED_ARGUMENT_MAX = 1
@@ -55,3 +56,21 @@ class Car:
         self.sendOrder(98, SPEED_ARGUMENT_MIN)
         time.sleep(1)
         self.reset()
+
+if __name__ == "__main__":
+    ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)   #à changer avec le bon port arduino
+    ser.reset_input_buffer()
+    car = Car(ser)
+    while True:
+        com = input("Commande pour la voiture -> ")
+        if com == "d":
+            car.turn_right()
+        if com == "q":
+            car.turn_left()
+        if com == "z":
+            car.speed_up()
+        if com == "s":
+            car.speed_down()
+        if com == "quit":
+            done = True
+            car.stop()
